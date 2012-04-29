@@ -1,0 +1,3 @@
+export UNIXCONFIG="/home/dpk/unixconfig"
+source "$UNIXCONFIG/bashrc"
+source "$UNIXCONFIG/alias_bash"
