@@ -15,7 +15,7 @@ export PS1="$NM[ $HI\u $HII\h $SI\w$NM ] $IN"
 
 if [ "$TERM" != "dumb" ]; then
     export LS_OPTIONS='--color=auto'
-    eval `dircolors ~/.dir_colors`
+    eval `dircolors $UNIXCONFIG/dir_colors`
 fi
 
 # Useful aliases
