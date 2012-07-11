@@ -1,0 +1,2 @@
+set runtimepath+=$UNIXCONFIG/vimfiles
+source $UNIXCONFIG/vimfiles/vimrc.vim
