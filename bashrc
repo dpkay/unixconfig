@@ -1,7 +1,7 @@
 # unixconfig stuff
 export COMMAND_OPEN="open"
 
-export PATH=/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$PATH
+export PATH=$UNIXCONFIG/bin:/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$PATH
 export MANPATH=/opt/local/share/man:$MANPATH
 
 # Terminal colours (after installing GNU coreutils)
