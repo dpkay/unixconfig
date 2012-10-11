@@ -38,7 +38,6 @@ if has("gui_macvim")
     set transparency=4
     set background=dark
     set linespace=2
-    colorscheme mustang
     set lines=42
     set columns=120
 elseif has("gui_win32")
@@ -46,12 +45,12 @@ elseif has("gui_win32")
     cd $HOME
     set lines=41
     set columns=120
-elseif has("gui_gtk2")
+elseif has("gui_running")
     set guifont=Monospace\ 11
     set lines=41
     set columns=120
-    colorscheme mustang
 endif
+colorscheme mustang
 
 " statusline layout
 set statusline=
