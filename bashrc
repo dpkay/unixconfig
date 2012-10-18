@@ -3,6 +3,14 @@ export COMMAND_OPEN="open"
 
 export PATH=$UNIXCONFIG/bin:/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$PATH
 export MANPATH=/opt/local/share/man:$MANPATH
+export EDITOR=vim
+if [ -e "`which mvim`" ]; then
+  export VISUAL=mvim
+else
+  export VISUAL=gvim
+fi
+  
+
 
 # Terminal colours (after installing GNU coreutils)
 NM="\[\033[0;38m\]" #means no background and white lines
