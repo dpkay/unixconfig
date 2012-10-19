@@ -1,3 +1,3 @@
-export UNIXCONFIG="/home/dpk/unixconfig"
+export UNIXCONFIG=`pwd`/unixconfig
 source "$UNIXCONFIG/bashrc"
 source "$UNIXCONFIG/alias_bash"
