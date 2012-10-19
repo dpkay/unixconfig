@@ -1,5 +1,5 @@
 # reload
-alias   so='source $UNIXCONFIG/bashrc && source $UNIXCONFIG/alias_bash'
+alias so='source $UNIXCONFIG/bashrc && source $UNIXCONFIG/alias_bash'
 
 # history
 alias	h='history'
@@ -7,33 +7,34 @@ alias	hs='h -S'	# save history of current shell into ~/.history
 alias	hl='h -M'	# load history from ~/.history into current shell
 
 # ls
-alias	lh='ls -alh $@'
-alias	ll='ls -al $@'
-alias	lt='ls -altr $@'
-alias	lth='ls -altrh $@'
-alias   l1='ls -tr1 $@'
-alias   l11='ls -tr1 $@ | t1'
+alias ls='ls $LS_OPTIONS $@'
+alias	ll='ls $LS_OPTIONS -al $@'
+alias	lt='ls $LS_OPTIONS -altr $@'
+alias l1='ls $LS_OPTIONS -tr1 $@'
 
 # navigation
-alias   c='pushd $@ > /dev/null && ls'
-alias   cdd='pushd `dirname $@`'
+alias c='pushd $@ > /dev/null && ls'
+alias cdd='pushd `dirname $@`'
 
 # editing/viewing/searching
-alias   e='gvim -o $@'
-alias   ew='gvim `which $@` && echo $@ > /dev/null' # second part is a hack to circumvent csh "feature"
-alias   ee='vim -c Ex'
-alias   xe='xargs -I @ echo'
-alias   xr='xargs ls -altr'
-alias   g='egrep --color'
-alias   ge='grep_ext' # TODO
-alias   gi='g -i'
+alias e='$VISUAL -o $@'
+alias ew='$VISUAL `which $@` && echo $@ > /dev/null' # second part is a hack to circumvent csh "feature"
+alias ee='vim -c Ex'
+alias xe='xargs -I @ echo'
+alias xr='xargs ls -altr'
+alias g='egrep --color'
+alias ge='grep_ext' # TODO
+alias gi='g -i'
 
 # finding
-alias   f='find' 
-alias   ff='find $@ -type f'              # nofollow files
-alias   fd='find $@ -type d'              # nofollow dirs 
-alias   fff='find $@ -follow -type f'      # follow files 
-alias   ffd='find $@ -follow -type d'      # follow dirs 
+alias f='find' 
+alias ff='find $@ -type f'              # nofollow files
+alias fd='find $@ -type d'              # nofollow dirs 
+alias fff='find $@ -follow -type f'      # follow files 
+alias ffd='find $@ -follow -type d'      # follow dirs 
 
 # x11 related
-alias   go='$COMMAND_OPEN $@'
+alias go='$COMMAND_OPEN $@'
+
+# ssh
+alias ssh="ssh -X"

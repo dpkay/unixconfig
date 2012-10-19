@@ -5,4 +5,3 @@ export HOME_DIR=/home/dpkay
 export HOME_DIR_LOCAL=`pwd`
 export UNIXCONFIG=$HOME_DIR/unixconfig
 source "$UNIXCONFIG/bashrc"
-source "$UNIXCONFIG/alias_bash"
