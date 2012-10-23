@@ -11,13 +11,14 @@ SI="\[\033[0;33m\]" # this is for the current directory
 IN="\[\033[0m\]"
 export PS1="$NM[ $HI\u $HII\h $SI\w$NM ] $IN"
 
-if [ "$TERM" != "dumb" ]; then
-    export LS_OPTIONS='--color=auto -h'
-    eval `dircolors $UNIXCONFIG/dir_colors`
-fi
-
 # =========== MAC SPECIFIC ===============
 if [ "`uname`" == "Darwin" ]; then
+
+  # MacPorts
+  if [ -e "/opt/local/bin/port" ]; then
+    export PATH=/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$PATH
+    export MANPATH=/opt/local/share/man:$MANPATH
+  fi
 
   # MacVim
   if [ -e "`which mvim`" ]; then
@@ -26,17 +27,17 @@ if [ "`uname`" == "Darwin" ]; then
     export VISUAL=vim
   fi
 
-  # MacPorts
-  if [ -e "`which port`" ]; then
-    export PATH=/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$PATH
-    export MANPATH=/opt/local/share/man:$MANPATH
-  fi
-
 else
   # Not Mac, so presumably Linux or perhaps Windows
   export VISUAL=gvim
 fi
   
+# =========== DIR COLORS ===============
+if [ "$TERM" != "dumb" ]; then
+    export LS_OPTIONS='--color=auto -h'
+    eval `dircolors $UNIXCONFIG/dir_colors`
+fi
+
 # =========== ALIASES ===============
 source "$UNIXCONFIG/alias_bash"
 
