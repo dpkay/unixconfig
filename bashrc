@@ -1,5 +1,4 @@
 # =========== SET UP UNIXCONFIG ===============
-export COMMAND_OPEN="open"
 export PATH=$UNIXCONFIG/bin:$PATH
 export EDITOR=vim
 
@@ -32,9 +31,12 @@ if [ "`uname`" == "Darwin" ]; then
     export MANPATH=/opt/local/share/man:$MANPATH
   fi
 
+  export COMMAND_OPEN="open"
+
 else
   # Not Mac, so presumably Linux or perhaps Windows
   export VISUAL=gvim
+  export COMMAND_OPEN="gnome-open"
 fi
   
 # =========== ALIASES ===============

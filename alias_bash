@@ -14,24 +14,25 @@ alias l1='ls $LS_OPTIONS -tr1 $@'
 
 # navigation
 alias c='pushd $@ > /dev/null && ls'
-alias cdd='pushd `dirname $@`'
+cdd() { pushd `dirname $@` ;}
 
 # editing/viewing/searching
 alias e='$VISUAL -o $@'
 alias ew='$VISUAL `which $@` && echo $@ > /dev/null' # second part is a hack to circumvent csh "feature"
 alias ee='vim -c Ex'
 alias xe='xargs -I @ echo'
-alias xr='xargs ls -altr'
-alias g='egrep --color'
+alias xr='xargs ls -altr'sh
+g() { egrep --color -I $@ ;} # don't match binary
 alias ge='grep_ext' # TODO
 alias gi='g -i'
+alias ec='$VISUAL -c Ex $UNIXCONFIG'
 
 # finding
 alias f='find' 
-alias ff='find $@ -type f'              # nofollow files
-alias fd='find $@ -type d'              # nofollow dirs 
-alias fff='find $@ -follow -type f'      # follow files 
-alias ffd='find $@ -follow -type d'      # follow dirs 
+ff() { find $@ -type f ;}               # nofollow files
+fd() { find $@ -type d ;}               # nofollow dirs 
+fff() { find $@ -follow -type f ;}      # follow files 
+ffd() { find $@ -follow -type d ;}      # follow dirs 
 
 # x11 related
 alias go='$COMMAND_OPEN $@'
