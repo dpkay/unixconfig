@@ -1,5 +1,7 @@
 [diff]
-external = git-meld
+  external = git-meld
 [user]
 	name = Dominik Kaeser
-	email = dominik.kaeser@gmail.com
+	email = dpkay@google.com
+[core]
+  editor = /usr/bin/vim
