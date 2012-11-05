@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ $(uname) = "Darwin" ]; then
+  /usr/bin/opendiff "$2" "$5" -merge "$1"
+else
+  meld $2 $5
+fi

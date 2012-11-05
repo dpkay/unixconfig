@@ -1,6 +1,7 @@
 # =========== SET UP UNIXCONFIG ===============
 export PATH=$UNIXCONFIG/bin:$PATH
 export EDITOR=vim
+export UNIXCONFIG_DOMAIN="$UNIXCONFIG/../cg/unixconfig_domain"
 
 # =========== TERMINAL COLORS ==============
 NM="\[\033[0;38m\]" # means no background and white lines
@@ -42,7 +43,7 @@ fi
 source "$UNIXCONFIG/alias_bash"
 
 # =========== DOMAIN SPECIFIC ===============
-if [ -e "$UNIXCONFIG/domain/bashrc" ]; then
-  source $UNIXCONFIG/domain/bashrc
+if [ -e "$UNIXCONFIG_DOMAIN" ]; then
+  source $UNIXCONFIG_DOMAIN/bashrc
 fi
 

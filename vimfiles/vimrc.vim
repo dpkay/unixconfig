@@ -99,3 +99,6 @@ cabbr Sne Ex ~/box/notes
 :command! -nargs=* Sn e ~/Dropbox/notes/<args>.txt
 :command! Hlo :silent!:execute ':highlight OverLength ctermbg=red ctermfg=white guibg=#592929 | :match OverLength /\%81v.\+/'
 
+" xml
+let g:xml_syntax_folding=1
+au FileType xml setlocal foldmethod=syntax
