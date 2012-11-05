@@ -47,3 +47,6 @@ if [ -e "$UNIXCONFIG_DOMAIN" ]; then
   source $UNIXCONFIG_DOMAIN/bashrc
 fi
 
+# =========== ADDITIONAL SCRIPT ===============
+# git autocompletion
+source "$UNIXCONFIG/bin/git-completion.bash"
