@@ -1,7 +1,10 @@
 # =========== SET UP UNIXCONFIG ===============
 export PATH=$UNIXCONFIG/bin:$PATH
 export EDITOR=vim
-export UNIXCONFIG_DOMAIN="$UNIXCONFIG/../cg/unixconfig_domain"
+
+# the following is not great. it should be HOME_DIR if google drive
+# actually supported setting the sync directory
+export UNIXCONFIG_DOMAIN="$HOME_DIR_LOCAL/cg/unixconfig_domain"
 
 # =========== TERMINAL COLORS ==============
 NM="\[\033[0;38m\]" # means no background and white lines
