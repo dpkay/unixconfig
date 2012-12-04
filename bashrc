@@ -1,5 +1,5 @@
 # =========== SET UP UNIXCONFIG ===============
-export PATH=$UNIXCONFIG/bin:$PATH
+export PATH=$UNIXCONFIG/bin:$HOME_DIR_LOCAL/bin:$HOME_DIR/bin:/usr/local/bin:$PATH
 export EDITOR=vim
 
 # the following is not great. it should be HOME_DIR if google drive
