@@ -42,6 +42,9 @@ if has("gui_macvim")
     set columns=120
 elseif has("gui_win32")
     set guifont=Consolas:h13:cANSI
+    cabbr Fbig set guifont=Consolas:h13:cANSI
+    cabbr Fsmall set guifont=Consolas:h11:cANSI
+    "set guifont=Source\ Code\ Pro\ Semibold:h12:cANSI,Consolas:h13:cANSI
     cd $HOME
     set lines=41
     set columns=120
@@ -102,3 +105,12 @@ cabbr Sne Ex ~/box/notes
 " xml
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
+
+" win/unix compatibility
+set fileformat=unix
+set fileformats=unix,dos
+
+" goog
+if has("gui_win32")
+  cabbr Ce cd c:\g4root\earth\googleclient\earth\client
+endif

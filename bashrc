@@ -29,9 +29,21 @@ if [ "`uname`" == "Darwin" ]; then
   else
     export VISUAL=vim
   fi
+  export PLATFORM=mac
+
+# ============ WINDOWS SPECIFIC ==========
+elif [ ! -z `uname | grep CYGWIN` ] || [ ! -z `uname | grep MINGW` ]; then
+  export PATH=$UNIXCONFIG/bin/win:$PATH
+  export COMMAND_OPEN="cygstart"  
+  export PLATFORM=windows
 
 else
-  # Not Mac, so presumably Linux or perhaps Windows
+  if [ "`uname`" == "Linux" ]; then
+    export PLATFORM=linux
+  else
+    export PLATFORM=unknown
+  fi
+  # Not Mac, so presumably Linux
   export VISUAL=gvim
   export COMMAND_OPEN="gnome-open"
 fi
