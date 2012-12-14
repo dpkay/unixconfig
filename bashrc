@@ -6,6 +6,18 @@ export EDITOR=vim
 # actually supported setting the sync directory
 export UNIXCONFIG_DOMAIN="$HOME_DIR_LOCAL/cg/unixconfig_domain"
 
+# =========== CXX MACROS ===================
+export C1_DIR="$HOME_DIR_LOCAL"
+export C2_DIR="$HOME_DIR_LOCAL"
+export C3_DIR="$HOME_DIR_LOCAL"
+export C4_DIR="$HOME_DIR_LOCAL"
+export C5_DIR="$HOME_DIR_LOCAL"
+c1() { cd $C1_DIR; }
+c2() { cd $C2_DIR; }
+c3() { cd $C3_DIR; }
+c4() { cd $C4_DIR; }
+c5() { cd $C5_DIR; }
+
 # =========== TERMINAL COLORS ==============
 NM="\[\033[0;38m\]" # means no background and white lines
 HI="\[\033[0;37m\]" # change this for letter colors

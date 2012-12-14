@@ -1,4 +1,3 @@
-" vimrc by dominik kaeser
 " dpk@pixar.com
 
 " various
@@ -98,6 +97,11 @@ cabbr Sv sp $UNIXCONFIG/vimfiles/vimrc.vim
 cabbr Sz sp ~/.zshrc
 cabbr Sc sp ~/.cshrc
 cabbr Sne Ex ~/box/notes
+cabbr C1 cd $C1_DIR
+cabbr C2 cd $C2_DIR
+cabbr C3 cd $C3_DIR
+cabbr C4 cd $C4_DIR
+cabbr C5 cd $C5_DIR
 :command! -nargs=+ EE :silent!:execute ':w | :execute ":! <args> >& /tmp/vim_err" | :cope 10 | :cf /tmp/vim_err' 
 :command! -nargs=* Sn e ~/Dropbox/notes/<args>.txt
 :command! Hlo :silent!:execute ':highlight OverLength ctermbg=red ctermfg=white guibg=#592929 | :match OverLength /\%81v.\+/'
