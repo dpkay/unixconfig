@@ -22,9 +22,11 @@ alias ew='$VISUAL `which $@` && echo $@ > /dev/null' # second part is a hack to 
 alias ee='vim -c Ex'
 alias xe='xargs -I @ echo'
 alias xr='xargs ls -altr'sh
-g() { egrep --color -I $@ ;} # don't match binary
+g() { egrep --color -I -d skip $@ ;} # don't match binary, no directories
 alias ge='grep_ext' # TODO
 alias gi='g -i'
+alias gr='g -r'
+alias gri='g -ri'
 alias ec='$VISUAL -c Ex $UNIXCONFIG'
 
 # finding

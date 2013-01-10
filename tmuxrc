@@ -1,0 +1,17 @@
+# === KEYBINDINGS ===
+# command prefix 
+set -g prefix C-s
+bind C-s send-prefix
+
+# hotkeys
+bind-key -n C-f choose-window
+bind-key -n C-j previous-window
+bind-key -n C-k next-window
+
+# === MISCELLANEOUS ===
+# zero based indexing
+set -g base-index 1
+
+# escape time
+set -s escape-time 0
+
