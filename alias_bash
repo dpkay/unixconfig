@@ -21,7 +21,7 @@ alias e='$VISUAL -o $@'
 alias ew='$VISUAL `which $@` && echo $@ > /dev/null' # second part is a hack to circumvent csh "feature"
 alias ee='vim -c Ex'
 alias xe='xargs -I @ echo'
-alias xr='xargs ls -altr'sh
+alias xr='xargs ls -altr'
 g() { egrep --color -I $@ ;} # don't match binary
 alias ge='grep_ext' # TODO
 alias gi='g -i'
@@ -33,6 +33,9 @@ ff() { find $@ -type f ;}               # nofollow files
 fd() { find $@ -type d ;}               # nofollow dirs 
 fff() { find $@ -follow -type f ;}      # follow files 
 ffd() { find $@ -follow -type d ;}      # follow dirs 
+
+# tools
+tm() { tmux -f $UNIXCONFIG/tmuxrc ;}
 
 # x11 related
 alias go='$COMMAND_OPEN $@'
