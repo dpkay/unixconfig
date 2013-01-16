@@ -39,8 +39,16 @@ ffd() { find $@ -follow -type d ;}      # follow dirs
 # tools
 tm() { tmux -f $UNIXCONFIG/tmuxrc ;}
 
+# git
+br() { git branch $@ ;}
+ch() { git checkout $@ ;}
+
 # x11 related
 alias go='$COMMAND_OPEN $@'
 
 # ssh
 alias ssh="ssh -X"
+
+# configurations
+alias configure-compiz='ccsm'
+alias configure-gnome='gnome-control-center'

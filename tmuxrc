@@ -10,8 +10,11 @@ bind-key -n C-k next-window
 
 # === MISCELLANEOUS ===
 # zero based indexing
-set -g base-index 1
+#set -g base-index 1
 
 # escape time
 set -s escape-time 0
 
+# mouse
+setw -g mode-mouse on
+set -g mouse-select-pane on

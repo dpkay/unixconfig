@@ -34,6 +34,7 @@ set guioptions-=r
 " color scheme and fonts
 if has("gui_macvim")
     set guifont=Menlo:h14
+    colorscheme mustang
     set transparency=4
     set background=dark
     set linespace=2
@@ -41,6 +42,7 @@ if has("gui_macvim")
     set columns=120
 elseif has("gui_win32")
     set guifont=Consolas:h13:cANSI
+    colorscheme mustang
     cabbr Fbig set guifont=Consolas:h13:cANSI
     cabbr Fsmall set guifont=Consolas:h11:cANSI
     "set guifont=Source\ Code\ Pro\ Semibold:h12:cANSI,Consolas:h13:cANSI
@@ -49,10 +51,10 @@ elseif has("gui_win32")
     set columns=120
 elseif has("gui_running")
     set guifont=Monospace\ 11
+    colorscheme mustang
     set lines=41
     set columns=120
 endif
-colorscheme mustang
 
 " statusline layout
 set statusline=
