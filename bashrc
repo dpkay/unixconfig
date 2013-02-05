@@ -26,13 +26,15 @@ SI="\[\033[0;33m\]" # this is for the current directory
 IN="\[\033[0m\]"
 export PS1="$NM[ $HI\u $HII\h $SI\w$NM ] $IN"
 
+export TMUX_DEFAULT_PATH=
 # =========== MAC SPECIFIC ===============
 if [ "`uname`" == "Darwin" ]; then
 
   # MacPorts
   if [ -e "/opt/local/bin/port" ]; then
-    export PATH=/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$PATH
+    export PATH=/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$UNIXCONFIG/bin/mac:$PATH
     export MANPATH=/opt/local/share/man:$MANPATH
+    export TMUX_DEFAULT_PATH="reattach-to-user-namespace -l bash"
   fi
 
   # MacVim
@@ -42,6 +44,9 @@ if [ "`uname`" == "Darwin" ]; then
     export VISUAL=vim
   fi
   export PLATFORM=mac
+
+  # Raise maximum number of open files
+  ulimit -S -n 2048
 
 # ============ WINDOWS SPECIFIC ==========
 elif [ ! -z `uname | grep CYGWIN` ] || [ ! -z `uname | grep MINGW` ]; then
