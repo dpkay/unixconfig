@@ -1,10 +1,8 @@
 # =========== SET UP UNIXCONFIG ===============
 export PATH=$UNIXCONFIG/bin:$HOME_DIR_LOCAL/bin:$HOME_DIR/bin:/usr/local/bin:$PATH
 export EDITOR=vim
-
-# the following is not great. it should be HOME_DIR if google drive
-# actually supported setting the sync directory
-export UNIXCONFIG_DOMAIN="$HOME_DIR_LOCAL/cg/unixconfig_domain"
+export UNIXCONFIG_DOMAIN="$HOME_DIR/unixconfig_domain"
+export TMUX_DEFAULT_PATH=
 
 # =========== CXX MACROS ===================
 export C1_DIR="$HOME_DIR_LOCAL"
@@ -21,12 +19,14 @@ alias c5='cd $C5_DIR'
 # =========== MAC SPECIFIC ===============
 if [ "`uname`" == "Darwin" ]; then
 
-  # MacPorts
-  if [ -e "/opt/local/bin/port" ]; then
-    export PATH=/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$PATH
-    export MANPATH=/opt/local/share/man:$MANPATH
-  fi
-
+#  # MacPorts
+#  if [ -e "/opt/local/bin/port" ]; then
+#    export PATH=/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$UNIXCONFIG/bin/mac:$PATH
+#    export MANPATH=/opt/local/share/man:$MANPATH
+#  fi
+  export PATH=$UNIXCONFIG/bin/mac:/usr/local/opt/coreutils/libexec/gnubin:$PATH
+  export TMUX_DEFAULT_PATH="reattach-to-user-namespace -l bash"
+  
   # MacVim
   if [ -e "`which mvim`" ]; then
     export VISUAL=mvim
@@ -34,6 +34,9 @@ if [ "`uname`" == "Darwin" ]; then
     export VISUAL=vim
   fi
   export PLATFORM=mac
+
+  # Raise maximum number of open files
+  ulimit -S -n 2048
 
 # ============ WINDOWS SPECIFIC ==========
 elif [ ! -z `uname | grep CYGWIN` ] || [ ! -z `uname | grep MINGW` ]; then

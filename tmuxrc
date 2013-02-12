@@ -19,6 +19,8 @@ set -s escape-time 0
 setw -g mode-mouse on
 set -g mouse-select-pane on
 
+set-option -g default-command $TMUX_DEFAULT_PATH
+
 # Toggle mouse on with ^B m
 bind a \
   set -g mode-mouse on \;\
