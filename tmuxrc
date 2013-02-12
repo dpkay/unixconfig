@@ -19,4 +19,4 @@ set -s escape-time 0
 setw -g mode-mouse on
 set -g mouse-select-pane on
 
-set-option -g default-command "reattach-to-user-namespace -l bash"
+set-option -g default-command $TMUX_DEFAULT_PATH

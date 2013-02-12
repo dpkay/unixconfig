@@ -1,10 +1,7 @@
 # =========== SET UP UNIXCONFIG ===============
 export PATH=$UNIXCONFIG/bin:$HOME_DIR_LOCAL/bin:$HOME_DIR/bin:/usr/local/bin:$PATH
 export EDITOR=vim
-
-# the following is not great. it should be HOME_DIR if google drive
-# actually supported setting the sync directory
-export UNIXCONFIG_DOMAIN="$HOME_DIR_LOCAL/cg/unixconfig_domain"
+export UNIXCONFIG_DOMAIN="$HOME_DIR/unixconfig_domain"
 
 # =========== CXX MACROS ===================
 export C1_DIR="$HOME_DIR_LOCAL"
@@ -30,13 +27,14 @@ export TMUX_DEFAULT_PATH=
 # =========== MAC SPECIFIC ===============
 if [ "`uname`" == "Darwin" ]; then
 
-  # MacPorts
-  if [ -e "/opt/local/bin/port" ]; then
-    export PATH=/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$UNIXCONFIG/bin/mac:$PATH
-    export MANPATH=/opt/local/share/man:$MANPATH
-    export TMUX_DEFAULT_PATH="reattach-to-user-namespace -l bash"
-  fi
-
+#  # MacPorts
+#  if [ -e "/opt/local/bin/port" ]; then
+#    export PATH=/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$UNIXCONFIG/bin/mac:$PATH
+#    export MANPATH=/opt/local/share/man:$MANPATH
+#  fi
+  export PATH=$UNIXCONFIG/bin/mac:/usr/local/opt/coreutils/libexec/gnubin:$PATH
+  export TMUX_DEFAULT_PATH="reattach-to-user-namespace -l bash"
+  
   # MacVim
   if [ -e "`which mvim`" ]; then
     export VISUAL=mvim

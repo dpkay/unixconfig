@@ -22,9 +22,19 @@ set hlsearch
 set hidden
 set history=100
 syntax enable
+set wildignore=*.obj,*.o,*.png,*copy/*,*/build/*,*Frameworks*
+filetype off
+
+set rtp+=$UNIXCONFIG/vimfiles/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'scrooloose/syntastic'
+Bundle 'git://git.wincent.com/command-t.git'
+
 filetype on
 filetype plugin on
-set wildignore=*.obj,*.o,*.png,*copy/*,*/build/*,*Frameworks*
 
 " disable all gui stuff
 set guioptions-=m
