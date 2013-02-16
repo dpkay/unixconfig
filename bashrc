@@ -1,3 +1,4 @@
+
 # =========== SET UP UNIXCONFIG ===============
 export PATH=$UNIXCONFIG/bin:$HOME_DIR_LOCAL/bin:$HOME_DIR/bin:/usr/local/bin:$PATH
 export EDITOR=vim
@@ -33,6 +34,7 @@ if [ "`uname`" == "Darwin" ]; then
   else
     export VISUAL=vim
   fi
+  export COMMAND_OPEN="open"
   export PLATFORM=mac
 
   # Raise maximum number of open files
@@ -51,7 +53,7 @@ else
     export PLATFORM=unknown
   fi
   # Not Mac, so presumably Linux
-  export VISUAL=gvim
+  export VISUAL=vim
   export COMMAND_OPEN="gnome-open"
 fi
   
