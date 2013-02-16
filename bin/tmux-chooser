@@ -44,7 +44,7 @@ for line in stdout.split('\n'):
             session_dict[session_name].active_window = window_id
 
 # Show chooser
-session_list = [] + session_dict.values()
+session_list = [None] + session_dict.values()
 if len(sys.argv)<2 and len(session_list)>1:
     print >>sys.stderr, "Existing sessions:"
     for i in range(1, len(session_list)):
@@ -57,12 +57,14 @@ if len(sys.argv)<2 and len(session_list)>1:
 
     else:
         print >>sys.stderr, \
-            "Choose a session or enter 0 to start a new one [0]: ".format(
+            "Choose a session or hit ENTER to start a new one: ".format(
                 len(session_list)),
         try:
             choice_str = raw_input()
-        except EOFError:  # Ctrl-D
-            print >>sys.stderr, "EOF errror. Aborting."
+        except (EOFError,            # Ctrl-D
+                KeyboardInterrupt):  # Ctrl-C
+            print >>sys.stderr
+            print >>sys.stderr, "EOF error. Aborting."
             sys.exit(1)
 
         if choice_str == '':

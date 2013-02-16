@@ -67,6 +67,7 @@ elseif has("gui_running")
 else
     "probably from linux terminal
     set t_Co=256
+    set term=screen-256color
     colorscheme mustang
 endif
 

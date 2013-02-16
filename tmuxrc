@@ -7,6 +7,12 @@ bind C-s send-prefix
 bind-key -n C-f choose-window
 bind-key -n C-j previous-window
 bind-key -n C-k next-window
+bind-key -n C-e last-pane 
+bind-key -r k select-pane -U
+bind-key -r j select-pane -D
+bind-key -r h select-pane -L
+bind-key -r l select-pane -R
+bind-key . command-prompt 'rename-session %%'
 
 # === MISCELLANEOUS ===
 # zero based indexing
