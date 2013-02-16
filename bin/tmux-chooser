@@ -1,9 +1,12 @@
 #!/usr/bin/python
+# Returns proper args for tmux
 
 import subprocess
 import re
+import os
 import sys
 
+args = " ".join(sys.argv[1:])
 p = subprocess.Popen(['/usr/bin/tmux','list-windows','-a'],
                      stdout=subprocess.PIPE,
                      stderr=subprocess.PIPE)
@@ -41,21 +44,41 @@ for line in stdout.split('\n'):
             session_dict[session_name].active_window = window_id
 
 # Show chooser
-session_list = session_dict.values()
-if len(session_list):
+session_list = [] + session_dict.values()
+if len(sys.argv)<2 and len(session_list)>1:
     print >>sys.stderr, "Existing sessions:"
-    for i in range(len(session_list)):
+    for i in range(1, len(session_list)):
         print >>sys.stderr, '    [{}] {}'.format(i, session_list[i])
-    #        print result.groups()
-    print >>sys.stderr, "Choose one between 0 and {} [0]:".format(i),
-    try:
-        choice = int(raw_input())
-    except ValueError:
-        choice = 0
-    if not choice in xrange(len(session_list)):
-        choice = 0
-    session_name = session_list[choice].name
-    print "attach -t {}".format(session_name)
+
+    print >>sys.stderr
+    if 'TMUX' in os.environ.keys():
+        print >>sys.stderr, "You are already in a tmux session. Aborting."
+        sys.exit(1)
+
+    else:
+        print >>sys.stderr, \
+            "Choose a session or enter 0 to start a new one [0]: ".format(
+                len(session_list)),
+        try:
+            choice_str = raw_input()
+        except EOFError:  # Ctrl-D
+            print >>sys.stderr, "EOF errror. Aborting."
+            sys.exit(1)
+
+        if choice_str == '':
+            print "new-session"
+        else:
+            try:
+                choice = int(choice_str)
+            except ValueError:
+                choice = -1
+            if not choice in xrange(1, len(session_list)):
+                print >>sys.stderr, \
+                    "Invalid choice '{}'. Aborting.".format(choice_str)
+                sys.exit(1)
+            else:
+                session_name = session_list[choice].name
+                print "attach -t {}".format(session_name)
 
 else:
-    print " ".join(sys.argv[1:])
+    print args
