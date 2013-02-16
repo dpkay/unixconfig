@@ -64,6 +64,10 @@ elseif has("gui_running")
     colorscheme mustang
     set lines=41
     set columns=120
+else
+    "probably from linux terminal
+    set t_Co=256
+    colorscheme mustang
 endif
 
 " statusline layout

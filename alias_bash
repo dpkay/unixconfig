@@ -37,7 +37,7 @@ fff() { find $@ -follow -type f ;}      # follow files
 ffd() { find $@ -follow -type d ;}      # follow dirs 
 
 # tools
-tm() { tmux -f $UNIXCONFIG/tmuxrc $@ ;}
+tm() { tmux -2 -f $UNIXCONFIG/tmuxrc `tmux-chooser $@` ;}
 
 # git
 br() { git branch $@ ;}

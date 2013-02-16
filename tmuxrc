@@ -20,6 +20,7 @@ setw -g mode-mouse on
 set -g mouse-select-pane on
 
 set-option -g default-command $TMUX_DEFAULT_PATH
+set -g default-terminal "xterm"
 
 # Toggle mouse on with ^B m
 bind a \
