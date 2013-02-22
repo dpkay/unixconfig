@@ -7,7 +7,17 @@ import os
 import sys
 
 args = " ".join(sys.argv[1:])
-p = subprocess.Popen(['/usr/bin/tmux','list-windows','-a'],
+p = subprocess.Popen('which tmux',
+                     stdout=subprocess.PIPE,
+                     stderr=subprocess.PIPE,
+                     shell=True)
+stdout, stderr = p.communicate()
+tmux_path = stdout.strip()
+if stderr or not os.path.exists(tmux_path):
+  print >>sys.stderr, "Unable to obtain tmux path!"
+  sys.exit(1)
+
+p = subprocess.Popen([tmux_path,'list-windows','-a'],
                      stdout=subprocess.PIPE,
                      stderr=subprocess.PIPE)
 stdout, stderr = p.communicate()
