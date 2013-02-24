@@ -42,6 +42,8 @@ set guioptions-=T
 set guioptions-=r
 
 " color scheme and fonts
+set t_Co=256
+set term=screen-256color
 if has("gui_macvim")
     set guifont=Menlo:h14
     colorscheme mustang
@@ -66,8 +68,6 @@ elseif has("gui_running")
     set columns=120
 else
     "probably from linux terminal
-    set t_Co=256
-    set term=screen-256color
     colorscheme mustang
 endif
 

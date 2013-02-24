@@ -4,6 +4,7 @@ export PATH=$UNIXCONFIG/bin:$HOME_DIR_LOCAL/bin:$HOME_DIR/bin:/usr/local/bin:$PA
 export EDITOR=vim
 export UNIXCONFIG_DOMAIN="$HOME_DIR/unixconfig_domain"
 export TMUX_DEFAULT_PATH=
+export PYTHONPATH=$HOME_DIR_LOCAL/appengine:$PYTHONPATH
 
 # =========== CXX MACROS ===================
 export C1_DIR="$HOME_DIR_LOCAL"
@@ -36,6 +37,7 @@ if [ "`uname`" == "Darwin" ]; then
   fi
   export COMMAND_OPEN="open"
   export PLATFORM=mac
+  alias vim='mvim -v $@'
 
   # Raise maximum number of open files
   ulimit -S -n 2048
