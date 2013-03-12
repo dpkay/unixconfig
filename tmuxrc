@@ -5,9 +5,9 @@ bind C-s send-prefix
 
 # hotkeys
 bind-key -n C-f choose-window
-bind-key -n C-j previous-window
-bind-key -n C-k next-window
-bind-key -n C-e last-pane 
+bind-key -n C-j next-window
+bind-key -n C-k previous-window
+bind-key -n C-t last-pane 
 bind-key -r k select-pane -U
 bind-key -r j select-pane -D
 bind-key -r h select-pane -L
