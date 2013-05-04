@@ -38,6 +38,11 @@ if [ "`uname`" == "Darwin" ]; then
   export COMMAND_OPEN="open"
   export PLATFORM=mac
   alias vim='mvim -v $@'
+  
+  # Araxis Merge command line utils
+  if [ -d "/Applications/Araxis Merge.app/Contents/Utilities" ]; then
+    export PATH=$PATH:/Applications/Araxis\ Merge.app/Contents/Utilities
+  fi
 
   # Raise maximum number of open files
   ulimit -S -n 2048
