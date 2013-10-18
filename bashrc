@@ -1,6 +1,6 @@
 
 # =========== SET UP UNIXCONFIG ===============
-export PATH=$UNIXCONFIG/bin:$HOME_DIR_LOCAL/bin:$HOME_DIR/bin:/usr/local/bin:$PATH
+export PATH=$UNIXCONFIG/bin:$HOME_DIR_LOCAL/bin:$HOME_DIR/bin:/usr/local/bin:/usr/local/android-sdk/platform-tools:/usr/local/android-sdk/tools:$PATH
 export EDITOR=vim
 export UNIXCONFIG_DOMAIN="$HOME_DIR/unixconfig_domain"
 export TMUX_DEFAULT_PATH=

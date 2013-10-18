@@ -1,0 +1,108 @@
+#!/usr/bin/perl -w- #-*-Perl-*-
+#!/usr/pkg/bin/perl -w-   #-*-Perl-*-
+
+use Getopt::Std;
+
+#$md = "\033[1m";   # bold
+#$us = "\033[4m";   # underline
+#$mb = "\033[5m";   # blink
+$mr = "\033[7m";    # reverse
+$me = "\033[m";     # mode end
+
+
+$usage = <<EOF;
+usage: gres [options] '<pattern>' '<replacement>' <file> ...
+    like grep but substitutes instead of printing
+    [options] include:
+       -w   : <pattern> must be a whole 'word'
+       -i   : <pattern> match is case insensitive
+       -f   : force
+EOF
+
+# ***** validate arguments *****
+getopts('wif');
+$pattern    = shift @ARGV;
+$replace    = shift @ARGV;
+
+die $usage unless defined($pattern) && defined($replace) && scalar(@ARGV);
+
+# add substitution so user can specify \n in replacement string
+$replace =~ s/\\n/\n/g;
+
+$opt_i = $opt_i;    # use it twice so I don't get warnings
+$opt_f = $opt_f;    # use it twice so I don't get warnings
+
+$ws = '\b' if ($opt_w);
+$ws = ''   unless ($opt_w);
+$ans = '';
+if ($opt_f) { $ans = "!"; }
+$total = 0;
+
+sub DoFile {
+    my($fname) = @_;
+    my($oname) = "$fname~gres~";
+#    print STDOUT "$fname lskdjflskdj\n\n";
+#    print STDOUT "$oname\n\n";
+    my($count) = 0;
+    my($changed);
+
+    return if $fname =~ /~$/;
+    return if -d $fname;
+    return if -l $fname;
+
+
+    open(IN,  $fname) || (warn("Unable to read $fname\n"), return);
+    binmode IN;
+    open(OUT, ">$oname") || (warn("Unable to write $oname\n"), return);
+    binmode OUT;
+
+    while (<IN>) {
+        $confirm = $_;
+        if ($opt_i) {
+            $changed = eval "s/$ws$pattern$ws/$replace/goi";
+            eval "\$confirm =~ s/$ws$pattern$ws/$mr$replace$me/goi";
+        } else {
+            $changed = eval "s/$ws$pattern$ws/$replace/go";
+            eval "\$confirm =~ s/$ws$pattern$ws/$mr$replace$me/go";
+        }
+        if ($changed) {
+            $count += $changed;
+            print $confirm unless ($ans eq '!');
+        }
+        print OUT;
+    }
+
+    close(IN);
+    close(OUT);
+
+    if ($count) {
+        if (-w $fname) {
+            if ($ans ne '!') {
+                print "$fname: make the $count changes (y/n/q/!)? ";
+                chop($ans = <STDIN>);
+            }
+            die "gres ABORTED\n" if (($ans eq 'q') || ($ans eq 'Q'));
+            if (($ans eq '!') || ($ans eq 'y') || ($ans eq 'Y')) {
+                rename($fname, "$fname~");
+                rename($oname, $fname);
+                $total += $count;
+                return;
+            } else {
+                print "$fname: NOT CHANGED\n";
+            }
+        } else {
+            warn("$fname is write protected -- changes aborted\n");
+        }
+    }
+    unlink($oname);
+}    
+
+foreach $file ( @ARGV) {
+    chomp $file;
+    $file =~ s/\r//g;
+    DoFile($file);
+}
+
+
+print "TOTAL: $total patterns changed\n";
+exit $total;        # return total number of changes made

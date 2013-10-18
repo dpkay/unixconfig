@@ -24,9 +24,9 @@ alias xe='xargs -I @ echo'
 alias xr='xargs ls -altr'sh
 g() { egrep --color -I -d skip $@ ;} # don't match binary, no directories
 alias ge='grep_ext' # TODO
-alias gi='g -i'
-alias gr='g -r'
-alias gri='g -ri'
+alias gi='g -iI'
+alias gr='g -rI'
+alias gri='g -riI'
 alias ec='$VISUAL -c Ex $UNIXCONFIG'
 
 # finding
@@ -50,6 +50,7 @@ ch() { git checkout $@ ;}
 
 # x11 related
 alias go='$COMMAND_OPEN $@'
+alias reset_display='export DISPLAY=localhost:0.0'
 
 # ssh
 alias ssh="ssh -X"
@@ -57,3 +58,6 @@ alias ssh="ssh -X"
 # configurations
 alias configure-compiz='ccsm'
 alias configure-gnome='gnome-control-center'
+
+# hacks
+alias spotify='LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu /usr/bin/spotify'
