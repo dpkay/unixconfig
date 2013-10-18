@@ -42,9 +42,12 @@ class Session:
 # Accumulate list-windows output
 session_dict = {}
 for line in stdout.split('\n'):
-    result = re.match(r'(\S*):(\S*):\s*(\S*)\s[^\(]*(\(active\))?', line)
+    result = re.match(r'([^:]*):([^:]*):\s*(\S*)\s[^\(]*(\(active\))?', line)
     if result:
         session_name, window_id, window_name, active_str = result.groups()
+        session_name = session_name.strip()
+        window_id = window_id.strip()
+        window_name = window_name.strip()
         try:
             session_dict[session_name]
         except KeyError:
