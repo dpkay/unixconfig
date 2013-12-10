@@ -153,3 +153,7 @@ func GitGrep(...)
   for i in a:000
     let s = s . ' ' . i
   endfor
+  exe s
+  let &grepprg = save
+endfun
+command -nargs=? G call GitGrep(<f-args>)
