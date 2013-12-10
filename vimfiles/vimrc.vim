@@ -111,6 +111,7 @@ cabbr B call QNameBufInit(0, 0, 0, 0)<CR>:~
 cabbr Ch cd %:h
 command! -nargs=+ Ps !perl -pe <args> 
 cabbr Sv sp $UNIXCONFIG/vimfiles/vimrc.vim
+cabbr Uc Ex $UNIXCONFIG
 cabbr Sz sp ~/.zshrc
 cabbr Sc sp ~/.cshrc
 cabbr Sne Ex ~/box/notes
@@ -135,3 +136,16 @@ set fileformats=unix,dos
 if has("gui_win32")
   cabbr Ce cd c:\g4root\earth\googleclient\earth\client
 endif
+
+" git grep 
+func GitGrep(...)
+  let save = &grepprg
+  set grepprg=git\ grep\ -n\ $*
+  let s = 'grep'
+  for i in a:000
+    let s = s . ' ' . i
+  endfor
+  exe s
+  let &grepprg = save
+endfun
+command -nargs=? G call GitGrep(<f-args>)

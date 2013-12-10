@@ -47,6 +47,7 @@ tm() {
 # git
 br() { git branch $@ ;}
 ch() { git checkout $@ ;}
+st() { git status $@ |& grep -v '~$' | grep -v '\.sw[op]$' ;}
 
 # x11 related
 alias go='$COMMAND_OPEN $@'
@@ -61,3 +62,7 @@ alias configure-gnome='gnome-control-center'
 
 # hacks
 alias spotify='LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu /usr/bin/spotify'
+
+alias color='colorit -c $UNIXCONFIG/coloritrc'
+
+alias hc='./hammer.sh -j16 --interactive |& color'
