@@ -1,18 +1,18 @@
 " dpk@pixar.com
 
 " various
+" set smartindent " breaks python comments
 set nocompatible
 set autoindent
-" set smartindent " breaks python comments
 set expandtab
 set tabstop=2
 set shiftwidth=2
+set smarttab
+set softtabstop=2
 set showmatch
 set ruler
 set incsearch
 set nu
-set smarttab
-set softtabstop=2
 set linebreak
 set nojoinspaces
 set ignorecase
@@ -32,6 +32,7 @@ Bundle 'gmarik/vundle'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'git://git.wincent.com/command-t.git'
+Bundle 'Lokaltog/vim-easymotion'
 
 filetype on
 filetype plugin on
@@ -50,8 +51,8 @@ if has("gui_macvim")
     set transparency=4
     set background=dark
     set linespace=2
-    set lines=42
-    set columns=120
+"    set lines=42
+"   set columns=120
 elseif has("gui_win32")
     set guifont=Consolas:h13:cANSI
     colorscheme mustang
@@ -109,7 +110,7 @@ nmap <C-k> :TlistShowPrototype<CR>
 " aliases
 cabbr B call QNameBufInit(0, 0, 0, 0)<CR>:~
 cabbr Ch cd %:h
-command! -nargs=+ Ps !perl -pe <args> 
+command! -nargs=+ Ps !perl -pe <args>
 cabbr Sv sp $UNIXCONFIG/vimfiles/vimrc.vim
 cabbr Sz sp ~/.zshrc
 cabbr Sc sp ~/.cshrc
@@ -119,7 +120,7 @@ cabbr C2 cd $C2_DIR
 cabbr C3 cd $C3_DIR
 cabbr C4 cd $C4_DIR
 cabbr C5 cd $C5_DIR
-:command! -nargs=+ EE :silent!:execute ':w | :execute ":! <args> >& /tmp/vim_err" | :cope 10 | :cf /tmp/vim_err' 
+:command! -nargs=+ EE :silent!:execute ':w | :execute ":! <args> >& /tmp/vim_err" | :cope 10 | :cf /tmp/vim_err'
 :command! -nargs=* Sn e ~/Dropbox/notes/<args>.txt
 :command! Hlo :silent!:execute ':highlight OverLength ctermbg=red ctermfg=white guibg=#592929 | :match OverLength /\%81v.\+/'
 
@@ -135,3 +136,10 @@ set fileformats=unix,dos
 if has("gui_win32")
   cabbr Ce cd c:\g4root\earth\googleclient\earth\client
 endif
+
+function! TrimWhiteSpace()
+  %s/\s\+$//e
+endfunction
+
+autocmd BufWritePre     * :call TrimWhiteSpace()
+"autocmd FileType c,cpp,cc,h,py,gyp,gypi,scons autocmd BufWritePre  * :call TrimWhiteSpace()
