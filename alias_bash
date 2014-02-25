@@ -30,14 +30,14 @@ alias gri='g -riI'
 alias ec='$VISUAL -c Ex $UNIXCONFIG'
 
 # finding
-alias f='find' 
+alias f='find'
 ff() { find $@ -type f ;}               # nofollow files
-fd() { find $@ -type d ;}               # nofollow dirs 
-fff() { find $@ -follow -type f ;}      # follow files 
-ffd() { find $@ -follow -type d ;}      # follow dirs 
+fd() { find $@ -type d ;}               # nofollow dirs
+fff() { find $@ -follow -type f ;}      # follow files
+ffd() { find $@ -follow -type d ;}      # follow dirs
 
 # tools
-tm() { 
+tm() {
   ARGS=`tmux-chooser $@`
   if [ $? -eq 0 ]; then
     tmux -2 -f $UNIXCONFIG/tmuxrc $ARGS
@@ -45,7 +45,12 @@ tm() {
 }
 
 # git
-br() { git branch $@ ;}
+br() {
+  # http://stackoverflow.com/questions/2514172/listing-each-branch-and-its-last-revisions-date-in-git
+  for k in `git branch | sed s/^..//`; do
+    echo -e `git log -1 --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k --`\\t"$k";
+  done | sort
+}
 ch() { git checkout $@ ;}
 st() { git status $@ |& grep -v '~$' | grep -v '\.sw[op]$' ;}
 
