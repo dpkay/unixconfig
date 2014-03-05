@@ -46,21 +46,21 @@ tm() {
 
 <<<<<<< HEAD
 # git. make sure git-completion.bash has been loaded.
-br() { git branch $@ ;}
-__git_complete br _git_branch
-=======
-# git
 br() {
   # http://stackoverflow.com/questions/2514172/listing-each-branch-and-its-last-revisions-date-in-git
   for k in `git branch | sed s/^..//`; do
     echo -e `git log -1 --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k --`\\t"$k";
   done | sort
 }
->>>>>>> beb87d11b1ce1debc52031f6c72cd54d86283af4
+__git_complete br _git_branch
+
 ch() { git checkout $@ ;}
 __git_complete ch _git_checkout
+
 st() { git status $@ 2>&1 | grep -v '~$' | grep -v '\.sw[op]$' ;}
+
 cm() { git commit -am "Quick commit (cm)"; }
+
 pull() {
   klist --test 2>/dev/null || kinit
   git pull
