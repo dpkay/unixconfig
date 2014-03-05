@@ -28,7 +28,7 @@ if [ "`uname`" == "Darwin" ]; then
 #  fi
   export PATH=$UNIXCONFIG/bin/mac:/usr/local/opt/coreutils/libexec/gnubin:$PATH
   export TMUX_DEFAULT_PATH="reattach-to-user-namespace -l bash"
-  
+
   # MacVim
   if [ -e "`which mvim`" ]; then
     export VISUAL=mvim
@@ -38,7 +38,7 @@ if [ "`uname`" == "Darwin" ]; then
   export COMMAND_OPEN="open"
   export PLATFORM=mac
   alias vim='mvim -v $@'
-  
+
   # Araxis Merge command line utils
   if [ -d "/Applications/Araxis Merge.app/Contents/Utilities" ]; then
     export PATH=$PATH:/Applications/Araxis\ Merge.app/Contents/Utilities
@@ -50,7 +50,7 @@ if [ "`uname`" == "Darwin" ]; then
 # ============ WINDOWS SPECIFIC ==========
 elif [ ! -z `uname | grep CYGWIN` ] || [ ! -z `uname | grep MINGW` ]; then
   export PATH=$UNIXCONFIG/bin/win:$PATH
-  export COMMAND_OPEN="cygstart"  
+  export COMMAND_OPEN="cygstart"
   export PLATFORM=windows
 
 else
@@ -63,15 +63,12 @@ else
   export VISUAL=vim
   export COMMAND_OPEN="gnome-open"
 fi
-  
+
 # =========== DIR COLORS ===============
 if [ "$TERM" != "dumb" ]; then
     export LS_OPTIONS='--color=auto -h'
     eval `dircolors $UNIXCONFIG/dir_colors`
 fi
-
-# =========== ALIASES ===============
-source "$UNIXCONFIG/alias_bash"
 
 # =========== DOMAIN SPECIFIC ===============
 if [ -e "$UNIXCONFIG_DOMAIN" ]; then
@@ -81,6 +78,9 @@ fi
 # =========== ADDITIONAL SCRIPTS ===============
 source "$UNIXCONFIG/bin/git-completion.bash"
 source "$UNIXCONFIG/bin/git-prompt.sh"
+
+# =========== ALIASES ===============
+source "$UNIXCONFIG/alias_bash"
 
 # =========== TERMINAL COLORS ==============
 NM="\[\033[0;38m\]" # means no background and white lines

@@ -145,7 +145,7 @@ endfunction
 autocmd BufWritePre     * :call TrimWhiteSpace()
 "autocmd FileType c,cpp,cc,h,py,gyp,gypi,scons autocmd BufWritePre  * :call TrimWhiteSpace()
 
-" git grep 
+" git grep
 func GitGrep(...)
   let save = &grepprg
   set grepprg=git\ grep\ -n\ $*
@@ -157,3 +157,6 @@ func GitGrep(...)
   let &grepprg = save
 endfun
 command -nargs=? G call GitGrep(<f-args>)
+
+" par
+set fp=par\ -w80
