@@ -33,6 +33,7 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'git://git.wincent.com/command-t.git'
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'tpope/vim-abolish'
 
 filetype on
 filetype plugin on
@@ -157,6 +158,8 @@ func GitGrep(...)
   let &grepprg = save
 endfun
 command -nargs=? G call GitGrep(<f-args>)
+
+let g:EasyMotion_leader_key='<Space>'
 
 " par
 set fp=par\ -w80
