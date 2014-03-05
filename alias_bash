@@ -44,7 +44,6 @@ tm() {
   fi
 }
 
-<<<<<<< HEAD
 # git. make sure git-completion.bash has been loaded.
 br() {
   # http://stackoverflow.com/questions/2514172/listing-each-branch-and-its-last-revisions-date-in-git
