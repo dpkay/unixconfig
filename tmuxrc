@@ -2,6 +2,7 @@
 # command prefix
 set -g prefix C-s
 bind C-s send-prefix
+bind c new-window -c "#{pane_current_path}"
 
 # hotkeys
 bind-key -n C-h choose-window
@@ -24,6 +25,7 @@ set -s escape-time 0
 setw -g mode-mouse on
 set -g mouse-select-pane on
 
+set-environment -g CHERE_INVOKING 1
 set-option -g default-command $TMUX_DEFAULT_PATH
 #set -g default-terminal "xterm"
 set -g default-terminal "screen-256color"
