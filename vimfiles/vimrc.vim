@@ -29,7 +29,7 @@ set rtp+=$UNIXCONFIG/vimfiles/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'git://git.wincent.com/command-t.git'
 Bundle 'Lokaltog/vim-easymotion'
@@ -46,6 +46,7 @@ set guioptions-=r
 " color scheme and fonts
 set t_Co=256
 set term=screen-256color
+colorscheme mustang
 if has("gui_macvim")
     set guifont=Menlo:h14
     colorscheme mustang
@@ -55,6 +56,7 @@ if has("gui_macvim")
 "    set lines=42
 "   set columns=120
 elseif has("gui_win32")
+    "set term=xterm
     set guifont=Consolas:h13:cANSI
     colorscheme mustang
     cabbr Fbig set guifont=Consolas:h13:cANSI
