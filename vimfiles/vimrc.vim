@@ -25,10 +25,12 @@ syntax enable
 set wildignore=*.obj,*.o,*.png,*copy/*,*/build/*,*Frameworks*
 filetype off
 
-set rtp+=$UNIXCONFIG/vimfiles/bundle/vundle/
-call vundle#rc()
+"set rtp+=$UNIXCONFIG/vimfiles/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 Bundle 'gmarik/vundle'
+Plugin 'SirVer/ultisnips'
 "Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'git://git.wincent.com/command-t.git'
@@ -165,3 +167,6 @@ let g:EasyMotion_leader_key='<Space>'
 
 " par
 set fp=par\ -w80
+
+noremap <C-B> :pyf /usr/lib/clang-format/clang-format.py<CR>
+inoremap <C-B> <C-O>:pyf /usr/lib/clang-format/clang-format.py<CR>

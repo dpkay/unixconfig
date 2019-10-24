@@ -100,3 +100,7 @@ export PS1="$PS1$GN\$(__git_ps1 \"%s \")"  # Git
 export PS1="$PS1$NM] "                     # White close bracket
 export PS1="$PS1$IN"                       # Reset font color
 
+
+export CUDA_HOME=/usr/local/cuda-9.0
+export PATH=${CUDA_HOME}/bin:${PATH}
+export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
