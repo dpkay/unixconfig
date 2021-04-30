@@ -26,7 +26,8 @@ if [ "`uname`" == "Darwin" ]; then
 #    export PATH=/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$UNIXCONFIG/bin/mac:$PATH
 #    export MANPATH=/opt/local/share/man:$MANPATH
 #  fi
-  export PATH=$UNIXCONFIG/bin/mac:/usr/local/opt/coreutils/libexec/gnubin:$PATH
+  export HOMEBREW_ROOT=$HOME/homebrew
+  export PATH=$UNIXCONFIG/bin/mac:$HOMEBREW_ROOT/bin:$HOMEBREW_ROOT/opt/coreutils/libexec/gnubin:$PATH
   export TMUX_DEFAULT_PATH="reattach-to-user-namespace -l bash"
 
   # MacVim
