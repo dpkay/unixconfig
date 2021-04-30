@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # Returns proper args for tmux
 
 import subprocess
@@ -10,16 +10,18 @@ args = " ".join(sys.argv[1:])
 p = subprocess.Popen('which tmux',
                      stdout=subprocess.PIPE,
                      stderr=subprocess.PIPE,
+                     encoding='utf8',
                      shell=True)
 stdout, stderr = p.communicate()
 tmux_path = stdout.strip()
 if stderr or not os.path.exists(tmux_path):
-  print >>sys.stderr, "Unable to obtain tmux path!"
+  print("Unable to obtain tmux path!", file=sys.stderr)
   sys.exit(1)
 
 p = subprocess.Popen([tmux_path,'list-windows','-a'],
                      stdout=subprocess.PIPE,
-                     stderr=subprocess.PIPE)
+                     stderr=subprocess.PIPE,
+                     encoding='utf8')
 stdout, stderr = p.communicate()
 
 class Session:
@@ -57,43 +59,42 @@ for line in stdout.split('\n'):
             session_dict[session_name].active_window = window_id
 
 # Show chooser
-session_list = [None] + session_dict.values()
+session_list = [None] + list(session_dict.values())
 if len(sys.argv)<2 and len(session_list)>1:
-    print >>sys.stderr, "Existing sessions:"
+    print("Existing sessions:", file=sys.stderr)
     for i in range(1, len(session_list)):
-        print >>sys.stderr, '    [{}] {}'.format(i, session_list[i])
+        print('    [{}] {}'.format(i, session_list[i]), file=sys.stderr)
 
-    print >>sys.stderr
+    print("", file=sys.stderr)
     if 'TMUX' in os.environ.keys():
-        print >>sys.stderr, "You are already in a tmux session. Aborting."
+        print("You are already in a tmux session. Aborting.", file=sys.stderr)
         sys.exit(1)
 
     else:
-        print >>sys.stderr, \
-            "Choose a session or hit ENTER to start a new one: ".format(
-                len(session_list)),
+        print("Choose a session or hit ENTER to start a new one: ".format(
+                len(session_list)), end="", file=sys.stderr)
         try:
-            choice_str = raw_input()
+            choice_str = input()
         except (EOFError,            # Ctrl-D
                 KeyboardInterrupt):  # Ctrl-C
-            print >>sys.stderr
-            print >>sys.stderr, "EOF error. Aborting."
+            print("", file=sys.stderr)
+            print("EOF error. Aborting.", file=sys.stderr)
             sys.exit(1)
 
         if choice_str == '':
-            print "new-session"
+            print("new-session")
         else:
             try:
                 choice = int(choice_str)
             except ValueError:
                 choice = -1
-            if not choice in xrange(1, len(session_list)):
-                print >>sys.stderr, \
-                    "Invalid choice '{}'. Aborting.".format(choice_str)
+            if not choice in range(1, len(session_list)):
+                print(
+                    "Invalid choice '{}'. Aborting.".format(choice_str), file=sys.stderr)
                 sys.exit(1)
             else:
                 session_name = session_list[choice].name
-                print "attach -t {}".format(session_name)
+                print("attach -t {}".format(session_name), file=sys.stderr)
 
 else:
-    print args
+    print(args)

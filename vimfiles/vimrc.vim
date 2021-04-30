@@ -168,5 +168,5 @@ let g:EasyMotion_leader_key='<Space>'
 " par
 set fp=par\ -w80
 
-noremap <C-B> :pyf /usr/lib/clang-format/clang-format.py<CR>
-inoremap <C-B> <C-O>:pyf /usr/lib/clang-format/clang-format.py<CR>
+noremap <C-B> :py3file /usr/lib/clang-format/clang-format.py<CR>
+inoremap <C-B> <C-O>:py3file /usr/lib/clang-format/clang-format.py<CR>

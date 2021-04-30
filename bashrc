@@ -61,7 +61,7 @@ else
   fi
   # Not Mac, so presumably Linux
   export VISUAL=vim
-  export COMMAND_OPEN="gnome-open"
+  export COMMAND_OPEN="xdg-open"
 fi
 
 # =========== DIR COLORS ===============
