@@ -1,0 +1,117 @@
+#!/usr/bin/python3
+"""Concatenates multiple input videos into one single output video, and optionally performs some processing along the way such as resizing/padding or text overlay rendering."""
+
+import argparse
+import os
+import subprocess
+import tempfile
+
+
+def serialize_dict_for_ffmpeg(d):
+  # Generate a string like "a=2:b=3:c=4".
+  return ':'.join(('{}={}'.format(v[0], v[1]) for v in d.items()))
+
+
+def generate_preprocess_shot_cmd(in_path, size, label, out_path):
+  # Assemble video filters.
+  video_filters = []
+  if label:
+    video_filters.append('drawbox=' + serialize_dict_for_ffmpeg({
+        't': 'fill',
+        'height': '24',
+        'width': 'iw',
+        'color': 'black@0.1',
+        #'y': 'ih-24',
+        'y': '5',
+    }))
+    video_filters.append('drawtext=' + serialize_dict_for_ffmpeg({
+        'text': '\'{}\''.format(label),
+        'fontcolor': 'white@0.8',
+        'fontsize': '16',
+        'x': '(w-tw)/2',
+        #'y': 'h-24+th/2',
+        'y': '5+th/2',
+    }))
+
+  if size:
+    video_filters.append(
+        'scale={width}:{height}:force_original_aspect_ratio=decrease'.format(
+            width=size[0], height=size[1]))
+    video_filters.append(
+        'pad={width}:{height}:(ow-iw)/2:(oh-ih)/2,setsar=1'.format(
+            width=size[0], height=size[1]))
+
+  # Assemble final ffmpeg command.
+  cmd = 'ffmpeg'
+  cmd += ' -i ' + in_path
+  if video_filters:
+    cmd += ' -vf "{}"'.format(','.join(video_filters))
+  cmd += ' -pix_fmt yuv420p'
+  cmd += ' ' + out_path
+  return cmd
+
+
+def generate_concat_cmd(list_file_path, out_path):
+  cmd = 'ffmpeg -f concat -safe 0 '
+  cmd += ' -i ' + list_file_path
+  cmd += ' -pix_fmt yuv420p'
+  cmd += ' -c:v copy'
+  cmd += ' -y '
+  cmd += ' ' + out_path
+  return cmd
+
+
+def call(cmd):
+  subprocess.call(cmd, shell=True)
+
+
+if __name__ == '__main__':
+  parser = argparse.ArgumentParser(
+      description='Concatenates videos with optional processing.')
+  parser.add_argument(
+      '--input_dir',
+      help='A directory containing all the input videos.',
+      required=True)
+  parser.add_argument('output_path', help='The path of the output video')
+  parser.add_argument(
+      '--render_filenames',
+      action='store_true',
+      help='Renders the input file name of each video as an overlay.')
+  parser.add_argument(
+      '--resize',
+      help='If provided, resizes each video to fit into the provided box size, preserving aspect ratio and padding with black bars on the side. The size must be provided in the format WxH, e.g. "1920x1080".'
+  )
+
+  args = parser.parse_args()
+
+  input_dir = args.input_dir
+  input_files = sorted(os.listdir(input_dir))
+  input_paths = [os.path.join(input_dir, f) for f in input_files]
+
+  resize_dimensions = None
+  if args.resize:
+    resize_dimensions = [int(d) for d in args.resize.split('x')]
+    if len(resize_dimensions
+          ) != 2 or resize_dimensions[0] <= 0 or resize_dimensions[1] <= 0:
+      raise RuntimeError("Invalid size: '{}'".format(args.resize))
+
+  out_paths = []
+  with tempfile.TemporaryDirectory() as tmp_folder:
+    # Preprocess all videos.
+    for filename in input_files:
+      name = filename.split('.')[0]
+      in_path = os.path.join(input_dir, filename)
+      out_path = os.path.join(tmp_folder, filename)
+      label = name if args.render_filenames else None
+      cmd = generate_preprocess_shot_cmd(in_path, resize_dimensions, label, out_path)
+      call(cmd)
+      out_paths.append(out_path)
+
+    # Concatenate preprocessed videos.
+    with tempfile.NamedTemporaryFile(mode='w', delete=False) as list_file:
+      for f in out_paths:
+        list_file.write("file '{}'\n".format(f))
+      list_file.flush()
+
+      cmd = generate_concat_cmd(list_file.name, args.output_path)
+      call(cmd)
