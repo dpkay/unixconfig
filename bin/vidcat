@@ -15,6 +15,14 @@ def serialize_dict_for_ffmpeg(d):
 def generate_preprocess_shot_cmd(in_path, size, label, out_path):
   # Assemble video filters.
   video_filters = []
+  if size:
+    video_filters.append(
+        'scale={width}:{height}:force_original_aspect_ratio=decrease'.format(
+            width=size[0], height=size[1]))
+    video_filters.append(
+        'pad={width}:{height}:(ow-iw)/2:(oh-ih)/2,setsar=1'.format(
+            width=size[0], height=size[1]))
+
   if label:
     video_filters.append('drawbox=' + serialize_dict_for_ffmpeg({
         't': 'fill',
@@ -32,14 +40,6 @@ def generate_preprocess_shot_cmd(in_path, size, label, out_path):
         #'y': 'h-24+th/2',
         'y': '5+th/2',
     }))
-
-  if size:
-    video_filters.append(
-        'scale={width}:{height}:force_original_aspect_ratio=decrease'.format(
-            width=size[0], height=size[1]))
-    video_filters.append(
-        'pad={width}:{height}:(ow-iw)/2:(oh-ih)/2,setsar=1'.format(
-            width=size[0], height=size[1]))
 
   # Assemble final ffmpeg command.
   cmd = 'ffmpeg'
