@@ -23,7 +23,7 @@ bind-key c new-window -c "#{pane_current_path}"
 set -s escape-time 0
 
 # mouse
-set -g mouse on
+set -g mouse off
 
 # Does not seem to work anymore with tmux 2.1, using custom new-window binding instead.
 # set-option -g default-command $TMUX_DEFAULT_PATH
