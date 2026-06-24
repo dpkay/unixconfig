@@ -62,3 +62,8 @@ shells (macOS Terminal) and non-login shells (Linux terminals) load identically.
   branch). Switching the login shell to Homebrew bash removes the nag entirely.
 - Keep `HOME_DIR` as `$HOME`, not a hardcoded `/home/<user>` — that path is wrong on
   macOS (`/Users/<user>`).
+- **`~/.local/bin` must stay on `PATH`** (added at the front in `bashrc`). User-level
+  tools install there — Claude Code (`~/.local/bin/claude`), `pipx`, etc. When switching
+  a machine's login shell (e.g. macOS zsh → bash), tools that the *old* shell's rc added
+  to `PATH` can silently disappear; make sure their dirs are in this shared `bashrc`, not
+  only in the abandoned `~/.zshrc`/`~/.zprofile`.
