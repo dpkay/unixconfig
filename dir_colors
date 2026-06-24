@@ -26,6 +26,13 @@ TERM rxvt
 TERM screen
 TERM screen-w
 TERM vt100
+# modern terminals (glob patterns; covers *-256color, tmux, iTerm, etc.)
+TERM xterm*
+TERM screen*
+TERM tmux*
+TERM *256color*
+TERM alacritty
+TERM ghostty
 
 # Below are the color init strings for the basic file types. A color init
 # string consists of one or more of the following numeric codes:

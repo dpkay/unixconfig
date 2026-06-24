@@ -26,9 +26,14 @@ if [ "`uname`" == "Darwin" ]; then
 #    export PATH=/opt/local/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$UNIXCONFIG/bin/mac:$PATH
 #    export MANPATH=/opt/local/share/man:$MANPATH
 #  fi
-  export HOMEBREW_ROOT=$HOME/homebrew
-  export PATH=$UNIXCONFIG/bin/mac:$HOMEBREW_ROOT/bin:$HOMEBREW_ROOT/opt/coreutils/libexec/gnubin:$PATH
+  # Homebrew prefix: /opt/homebrew on Apple Silicon, /usr/local on Intel
+  if [ -d /opt/homebrew ]; then HOMEBREW_ROOT=/opt/homebrew; else HOMEBREW_ROOT=/usr/local; fi
+  export HOMEBREW_ROOT
+  # gnubin first so GNU coreutils (ls, dircolors, ...) shadow the BSD ones
+  export PATH=$UNIXCONFIG/bin/mac:$HOMEBREW_ROOT/opt/coreutils/libexec/gnubin:$HOMEBREW_ROOT/bin:$PATH
   export TMUX_DEFAULT_PATH="reattach-to-user-namespace -l bash"
+  # silence Apple's /bin/bash deprecation nag (harmless under Homebrew bash)
+  export BASH_SILENCE_DEPRECATION_WARNING=1
 
   # MacVim
   if [ -e "`which mvim`" ]; then
